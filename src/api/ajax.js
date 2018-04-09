@@ -9,9 +9,10 @@ export default function ajax(url,data={},method='get') {
        dataString+=key+'='+value+'&'
       });
       if(dataString){
-        dataString=dataString.substring(0,dataString.length-1)
+        dataString=dataString.substring(0,dataString.length-1);
+        url+='?'+dataString;
       }
-      url+='?'+dataString;
+
       promise=axios.get(url)
     }else{
       promise=axios.post(url,data)

@@ -1,18 +1,22 @@
 <template>
   <div>
     <router-view></router-view>
-    <footer-guide></footer-guide>
+    <footer-guide v-if="$route.meta.showFooter"> </footer-guide>
   </div>
 
 </template>
 <script>
-   import {reqAddress} from './api/index'
-    import FooterGuide from './components/FooterGuide/FooterGuide'
+    import {reqAddress} from './api/index'
+    import FooterGuide from './components/FooterGuide/FooterGuide';
+
+
     export default {
-    components:{FooterGuide},
-      async mounted () {
-        const result = await reqAddress('40.10038,116.37867')
-        console.log(result)
+     components:{FooterGuide},
+      mounted () {
+        this.$store.dispatch('getAddress');
+        this.$store.dispatch('getFoodList');
+        this.$store.dispatch('getShopList');
+        this.$store.dispatch('getUserInfo');
       },
 
     }
